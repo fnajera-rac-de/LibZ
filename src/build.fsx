@@ -89,7 +89,7 @@ Target "Version" (fun _ ->
 )
 
 Target "Release" (fun _ ->
-    [ ""; "lib"; "lib/net35"; "lib/net40"; "tool" ]
+    [ ""; "lib"; "lib/net40"; "tool" ]
     |> Seq.map (sprintf "./../out/%s")
     |> CleanDirs
 
@@ -101,11 +101,7 @@ Target "Release" (fun _ ->
     !! "./../out/tool/LibZ.Tool.Interfaces.dll"
     |> Copy "./../out/lib"
 
-    [ "./LibZ.Bootstrap.35/LibZResolver.header.cs"; "./LibZ.Bootstrap.40/LibZResolver.cs" ]
-    |> AppendTextFiles "./../out/lib/net35/LibZResolver.cs"
-
     !! "./LibZ.Bootstrap.40/LibZResolver.cs" |> Copy "./../out/lib/net40"
-    !! "./LibZ.Bootstrap.35/bin/Release/LibZ.Bootstrap.dll" |> Copy "./../out/lib/net35"
     !! "./LibZ.Bootstrap.40/bin/Release/LibZ.Bootstrap.dll" |> Copy "./../out/lib/net40"
 
     let temp = (environVarOrDefault "TEMP" "./../out/temp") @@ "libz"
@@ -170,9 +166,7 @@ Target "NuGet" (fun _ ->
                     ] |> List.choose id
                 Files = 
                     [
-                        (@"lib\net35\*.cs", Some @"content\net35", None) |> cond 's'
                         (@"lib\net40\*.cs", Some @"content\net4-client", None) |> cond 's' 
-                        (@"lib\net35\*.dll", Some @"lib\net35", None) |> cond 'l' 
                         (@"lib\net40\*.dll", Some @"lib\net4-client", None) |> cond 'l' 
                         (@"tool\libz.exe", Some @"tools\", None) |> cond 't' 
                     ] |> List.choose id
@@ -208,7 +202,6 @@ Target "TestApps" (fun _ ->
         |> Log (sprintf "Build-%s-%s-Output: " sln platform)
 
     build "TestApp20" "x86"
-    build "TestApp35" "x86"
     build "TestApp40" "x86"
     build "TestApp40" "x64"
     build "TestApp45" "x86"
@@ -216,8 +209,6 @@ Target "TestApps" (fun _ ->
 
     // test-injection-asmz "20" "x86"
     // test-injection-libz "20" "x86"
-    // test-injection-asmz "35" "x86"
-    // test-injection-libz "35" "x86"
     // test-injection-asmz "40" "x86"
     // test-injection-asmz "40" "x64"
     // test-injection-libz "40" "x86"
