@@ -118,14 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="LibZBootstrap35Assembly" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>resources\libz.bootstrap.35.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="LibZBootstrap40Assembly" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\libz.bootstrap.40.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="LibZInjected35Assembly" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>resources\libz.injected.35.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="LibZInjected40Assembly" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\libz.injected.40.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

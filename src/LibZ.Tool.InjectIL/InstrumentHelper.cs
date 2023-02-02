@@ -267,7 +267,7 @@ namespace LibZ.Tool.InjectIL
 				frameworkVersion < Version2000 ? null :
 					frameworkVersion == Version2050 ? null :
 						frameworkVersion >= Version4000 ? Precompiled.LibZInjected40Assembly :
-							frameworkVersion >= Version2000 ? Precompiled.LibZInjected35Assembly :
+							// frameworkVersion >= Version2000 ? Precompiled.LibZInjected35Assembly :
 								null;
 		}
 
@@ -280,7 +280,7 @@ namespace LibZ.Tool.InjectIL
 				frameworkVersion < Version2000 ? null :
 					frameworkVersion == Version2050 ? null :
 						frameworkVersion >= Version4000 ? Precompiled.LibZBootstrap40Assembly :
-							frameworkVersion >= Version2000 ? Precompiled.LibZBootstrap35Assembly :
+							// frameworkVersion >= Version2000 ? Precompiled.LibZBootstrap35Assembly :
 								null;
 		}
 
