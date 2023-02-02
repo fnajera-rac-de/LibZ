@@ -1,3 +1,7 @@
+## 1.2.0.1
+- remove net35
+- fix reading of streams
+
 ## 1.2.0.0
 - --safe-load option forcing assemblies to be loaded from disk
 - fixes for mono compatibility (still work in progress)
