@@ -217,9 +217,18 @@ namespace LibZ.Tool.Tasks
 						return null;
 					using (var zstream = compressed ? new DeflateStream(rstream, CompressionMode.Decompress) : rstream)
 					{
-						zstream.Read(buffer, 0, size);
+                        var offset = 0;
+                        while (true)
+                        {
+                            var readThis = zstream.Read(buffer, offset, size - offset);
+                            if (readThis == 0)
+                            {
+                                break;
+                            }
+                            offset += readThis;
+                        }
 					}
-				}
+                }
 
 				return buffer;
 			}

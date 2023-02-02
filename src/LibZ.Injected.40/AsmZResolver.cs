@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 /*
  * Copyright (c) 2013-2014, Milosz Krajewski
@@ -249,8 +249,17 @@ namespace LibZ.Injected
 					if (rstream == null) return null;
 					using (var zstream = compressed ? new DeflateStream(rstream, CompressionMode.Decompress) : rstream)
 					{
-						zstream.Read(buffer, 0, size);
-					}
+                        var offset = 0;
+						while (true)
+						{
+                            var readThis = zstream.Read(buffer, offset, size - offset);
+                            if (readThis == 0)
+                            {
+                                break;
+                            }
+                            offset += readThis;
+                        }
+                    }
 				}
 
 				var loaded = unmanaged || portable

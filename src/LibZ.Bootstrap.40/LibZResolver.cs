@@ -1251,8 +1251,18 @@ namespace LibZ.Bootstrap
 				var result = new byte[length];
 				if (position >= 0)
 					stream.Position = position;
-				var read = stream.Read(result, 0, length);
-				if (read < length)
+				var offset = 0;
+                while (true)
+                {
+					var readThis = stream.Read(result, offset, length - offset);
+                    if (readThis == 0)
+                    {
+                        break;
+                    }
+
+                    offset += readThis;
+                }
+				if (offset < length)
 					throw new IOException("LibZ container is corrupted");
 				return result;
 			}
