@@ -1,3 +1,7 @@
+## 1.2.0.2
+- update cecil
+- allow writing PDB files if they existed
+
 ## 1.2.0.1
 - remove net35
 - fix reading of streams
