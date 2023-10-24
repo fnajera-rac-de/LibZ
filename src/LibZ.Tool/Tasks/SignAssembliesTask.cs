@@ -80,7 +80,7 @@ namespace LibZ.Tool.Tasks
 
 			foreach (var fileName in FindFiles(includePatterns, excludePatterns))
 			{
-				var assembly = MsilUtilities.LoadAssembly(fileName);
+				var assembly = MsilUtilities.LoadAssembly(fileName, true);
 
 				if (!MsilUtilities.IsManaged(assembly))
 				{

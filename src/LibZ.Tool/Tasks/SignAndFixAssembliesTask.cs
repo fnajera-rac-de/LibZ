@@ -116,7 +116,7 @@ namespace LibZ.Tool.Tasks
 
 			foreach (var fileName in fileNames)
 			{
-				var assembly = MsilUtilities.LoadAssembly(fileName);
+				var assembly = MsilUtilities.LoadAssembly(fileName, true);
 				var assemblyInfo = new AssemblyInfo {
 					FileName = fileName,
 					Assembly = assembly,
@@ -155,7 +155,7 @@ namespace LibZ.Tool.Tasks
 				}
 
 				MsilUtilities.SaveAssembly(assemblyInfo.Assembly, assemblyInfo.FileName, keyPair);
-				assemblyInfo.Assembly = MsilUtilities.LoadAssembly(assemblyInfo.FileName);
+				assemblyInfo.Assembly = MsilUtilities.LoadAssembly(assemblyInfo.FileName, true);
 				assemblyInfo.ReferencedBy.ForEach(r => r.Invalid = true);
 				assemblyInfo.Rewritten = true;
 

@@ -78,7 +78,7 @@ namespace LibZ.Tool.Tasks
 			bool move)
 		{
 			var keyPair = MsilUtilities.LoadKeyPair(keyFileName, keyFilePassword);
-			var assembly = MsilUtilities.LoadAssembly(mainFileName);
+			var assembly = MsilUtilities.LoadAssembly(mainFileName, true);
 			var injectedFileNames = new List<string>();
 
 			// TODO:MAK exclude?

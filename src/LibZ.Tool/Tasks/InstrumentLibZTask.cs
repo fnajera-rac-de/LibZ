@@ -101,7 +101,7 @@ namespace LibZ.Tool.Tasks
 			if (libzPatterns == null)
 				libzPatterns = new string[0];
 
-			var targetAssembly = MsilUtilities.LoadAssembly(mainFileName);
+			var targetAssembly = MsilUtilities.LoadAssembly(mainFileName, true);
 			ValidateLibZInstrumentation(targetAssembly);
 			
 			var keyPair = MsilUtilities.LoadKeyPair(keyFileName, keyFilePassword);

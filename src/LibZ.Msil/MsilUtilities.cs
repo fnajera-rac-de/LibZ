@@ -53,6 +53,7 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Mono.Cecil;
+using Mono.Cecil.Pdb;
 using NLog;
 
 namespace LibZ.Msil
@@ -146,13 +147,32 @@ namespace LibZ.Msil
 		/// <summary>Loads the assembly.</summary>
 		/// <param name="assemblyFileName">Name of the assembly file.</param>
 		/// <returns>Loaded assembly.</returns>
-		public static AssemblyDefinition LoadAssembly(string assemblyFileName)
+		public static AssemblyDefinition LoadAssembly(string assemblyFileName, bool attemptLoadPdb)
 		{
 			try
 			{
-				Log.Debug("Loading '{0}'", assemblyFileName);
-				var result = AssemblyDefinition.ReadAssembly(assemblyFileName);
-				Log.Debug("Loaded '{0}'", result.FullName);
+				var pdb = Path.ChangeExtension(assemblyFileName, ".pdb");
+				AssemblyDefinition result;
+				if (attemptLoadPdb && File.Exists(pdb))
+				{
+					Log.Debug("Loading '{0}' with PDB", assemblyFileName);
+					result = AssemblyDefinition.ReadAssembly(new MemoryStream(File.ReadAllBytes(assemblyFileName)), new ReaderParameters
+					{
+						ReadSymbols = true,
+						SymbolReaderProvider = new PdbReaderProvider(),
+						SymbolStream = new MemoryStream(File.ReadAllBytes(pdb))
+					});
+					Log.Debug("Loaded '{0}' with PDB", result.FullName);
+				}
+				else
+				{
+					Log.Debug("Loading '{0}'", assemblyFileName);
+					result = AssemblyDefinition.ReadAssembly(new MemoryStream(File.ReadAllBytes(assemblyFileName)), new ReaderParameters
+					{
+					});
+					Log.Debug("Loaded '{0}'", result.FullName);
+				}
+
 				return result;
 			}
 			catch
@@ -192,36 +212,40 @@ namespace LibZ.Msil
 			AssemblyDefinition assembly, string assemblyFileName,
 			StrongNameKeyPair keyPair = null)
 		{
-			var tempFileName = String.Format("{0}.{1:N}", assemblyFileName, Guid.NewGuid());
+			var pdbFileName = Path.ChangeExtension(assemblyFileName, "pdb");
 
-			try
+			var parameters = new WriterParameters();
+
+			if (assembly.MainModule.HasSymbols)
+			{
+				parameters.WriteSymbols = true;
+				parameters.SymbolWriterProvider = new PdbWriterProvider();
+				if (keyPair == null)
+				{
+					Log.Debug("Saving '{0}' with PDB", assemblyFileName);
+				}
+				else
+				{
+					Log.Debug("Saving and signing '{0}' with PDB", assemblyFileName);
+					parameters.StrongNameKeyPair = keyPair;
+				}
+			}
+			else
 			{
 				if (keyPair == null)
 				{
 					Log.Debug("Saving '{0}'", assemblyFileName);
-					assembly.Write(tempFileName);
 				}
 				else
 				{
 					Log.Debug("Saving and signing '{0}'", assemblyFileName);
-					assembly.Write(tempFileName, new WriterParameters { StrongNameKeyPair = keyPair });
+					parameters.StrongNameKeyPair = keyPair;
 				}
-
-				File.Delete(assemblyFileName);
-				File.Move(tempFileName, assemblyFileName);
-
-				// TODO:MAK pdb may also be merged, but it's not a priority for me. 
-				// I need to deleted in though as it no longer matches assembly
-				var pdbFileName = Path.ChangeExtension(assemblyFileName, "pdb");
-				if (File.Exists(pdbFileName))
-					DeleteFile(pdbFileName);
 			}
-			catch
-			{
-				if (File.Exists(tempFileName))
-					DeleteFile(tempFileName);
-				throw;
-			}
+
+			File.Delete(assemblyFileName);
+			File.Delete(pdbFileName);
+			assembly.Write(assemblyFileName, parameters);
 		}
 
 		/// <summary>Compares assembly names.</summary>

@@ -87,14 +87,14 @@ namespace LibZ.Tool.Tasks
 				throw FileNotFound(mainFileName);
 
 			var keyPair = MsilUtilities.LoadKeyPair(keyFileName, keyFilePassword);
-			var assembly = MsilUtilities.LoadAssembly(mainFileName);
+			var assembly = MsilUtilities.LoadAssembly(mainFileName, true);
 			ValidateAsmZInstrumentation(assembly);
 
 			var injectedFileNames = new List<string>();
 
 			foreach (var fileName in FindFiles(includePatterns, excludePatterns))
 			{
-				var sourceAssembly = MsilUtilities.LoadAssembly(fileName);
+				var sourceAssembly = MsilUtilities.LoadAssembly(fileName, false);
 				if (sourceAssembly == null)
 				{
 					Log.Error("Assembly '{0}' could not be loaded", fileName);

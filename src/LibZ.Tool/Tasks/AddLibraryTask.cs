@@ -88,7 +88,7 @@ namespace LibZ.Tool.Tasks
 			{
 				foreach (var fileName in FindFiles(includePatterns, excludePatterns))
 				{
-					var assembly = MsilUtilities.LoadAssembly(fileName);
+					var assembly = MsilUtilities.LoadAssembly(fileName, false);
 					if (assembly == null)
 					{
 						Log.Warn("Assembly from '{0}' could not be loaded", fileName);
