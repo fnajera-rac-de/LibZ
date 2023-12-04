@@ -73,7 +73,7 @@ Target "Clean" (fun _ ->
 Target "Build" (fun _ ->
     let build sln =
         sln
-        |> MSBuildRelease null "Build"
+        |> MSBuildRelease null "Restore,Build"
         |> Log "Build-Output: "
 
     !! "*.sln" |> build
@@ -198,7 +198,7 @@ Target "Publish" (fun _ ->
 Target "TestApps" (fun _ ->
     let build sln platform =
         !! (sprintf "Tests/%s/*.sln" sln)
-        |> MSBuildReleaseExt null [ ("Platform", platform) ] "Build"
+        |> MSBuildReleaseExt null [ ("Platform", platform) ] "Restore,Build"
         |> Log (sprintf "Build-%s-%s-Output: " sln platform)
 
     build "TestApp20" "x86"
