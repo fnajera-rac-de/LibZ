@@ -1,3 +1,6 @@
+## 1.2.0.3
+- add support for .NET 6
+
 ## 1.2.0.2
 - update cecil
 - allow writing PDB files if they existed
