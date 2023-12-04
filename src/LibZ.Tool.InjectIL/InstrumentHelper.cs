@@ -75,6 +75,9 @@ namespace LibZ.Tool.InjectIL
 		/// <summary>.NET 4, 4.5</summary>
 		private static readonly Version Version4000 = new Version(4, 0, 0, 0);
 
+		/// <summary>.NET 6</summary>
+		private static readonly Version Version6000 = new Version(6, 0, 0, 0);
+
 		#endregion
 
 		#region fields
@@ -264,11 +267,12 @@ namespace LibZ.Tool.InjectIL
 		public static byte[] GetInjectedAssemblyImage(Version frameworkVersion)
 		{
 			return
-				frameworkVersion < Version2000 ? null :
-					frameworkVersion == Version2050 ? null :
-						frameworkVersion >= Version4000 ? Precompiled.LibZInjected40Assembly :
-							// frameworkVersion >= Version2000 ? Precompiled.LibZInjected35Assembly :
-								null;
+				frameworkVersion >= Version6000 ? Precompiled.LibZInjectednet60Assembly :
+					frameworkVersion < Version2000 ? null :
+						frameworkVersion == Version2050 ? null :
+							frameworkVersion >= Version4000 ? Precompiled.LibZInjected40Assembly :
+								// frameworkVersion >= Version2000 ? Precompiled.LibZInjected35Assembly :
+									null;
 		}
 
 		/// <summary>Gets the bootstrap assembly.</summary>
@@ -277,11 +281,12 @@ namespace LibZ.Tool.InjectIL
 		public static byte[] GetBootstrapAssemblyImage(Version frameworkVersion)
 		{
 			return
-				frameworkVersion < Version2000 ? null :
-					frameworkVersion == Version2050 ? null :
-						frameworkVersion >= Version4000 ? Precompiled.LibZBootstrap40Assembly :
-							// frameworkVersion >= Version2000 ? Precompiled.LibZBootstrap35Assembly :
-								null;
+				frameworkVersion >= Version6000 ? Precompiled.LibZBootstrapnet60Assembly :
+					frameworkVersion < Version2000 ? null :
+						frameworkVersion == Version2050 ? null :
+							frameworkVersion >= Version4000 ? Precompiled.LibZBootstrap40Assembly :
+								// frameworkVersion >= Version2000 ? Precompiled.LibZBootstrap35Assembly :
+									null;
 		}
 
 		#endregion

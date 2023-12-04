@@ -67,7 +67,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using Microsoft.Win32;
-#if !NET35
+#if !NET35 && !NET6_0_OR_GREATER
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 #endif
@@ -204,7 +204,7 @@ namespace LibZ.Bootstrap
 			private set { SharedData.Set(3, value); }
 		}
 
-#if !NET35
+#if !NET35 && !NET6_0_OR_GREATER
 
 		/// <summary>Gets or sets the GetCatalog callback.</summary>
 		/// <value>The GetCatalog callback.</value>
@@ -253,7 +253,7 @@ namespace LibZ.Bootstrap
 
 				RegisterStreamCallback = RegisterStreamImplementation;
 
-#if !NET35
+#if !NET35 && !NET6_0_OR_GREATER
 				GetCatalogCallback = GetCatalogImplementation;
 				GetAllCatalogsCallback = GetAllCatalogsImplementation;
 #endif
@@ -297,7 +297,7 @@ namespace LibZ.Bootstrap
 			}
 		}
 
-#if !NET35
+#if !NET35 && !NET6_0_OR_GREATER
 
 		private static ComposablePartCatalog GetCatalogImplementation(Guid guid)
 		{
@@ -360,7 +360,7 @@ namespace LibZ.Bootstrap
 			return action();
 		}
 
-#if !NET35
+#if !NET35 && !NET6_0_OR_GREATER
 
 		/// <summary>Gets the catalog.</summary>
 		/// <param name="handle">The handle.</param>
@@ -1346,7 +1346,7 @@ namespace LibZ.Bootstrap
 
 		#region class LibZCatalog
 
-#if !NET35
+#if !NET35 && !NET6_0_OR_GREATER
 
 		/// <summary>Catalog (in MEF sense) for given LibZReader.</summary>
 		internal class LibZCatalog: ComposablePartCatalog
@@ -1578,11 +1578,16 @@ namespace LibZ.Bootstrap
 			/// <summary>Initializes the <see cref="Helpers"/> class.</summary>
 			static Helpers()
 			{
-				var value =
-					GetRegistryDWORD(Registry.CurrentUser, REGISTRY_KEY_PATH, REGISTRY_KEY_NAME) ??
-						GetRegistryDWORD(Registry.LocalMachine, REGISTRY_KEY_PATH, REGISTRY_KEY_NAME) ??
-							0;
-				UseTrace = value != 0;
+#if NET6_0_OR_GREATER
+				if (OperatingSystem.IsWindows())
+#endif
+				{
+					var value =
+						GetRegistryDWORD(Registry.CurrentUser, REGISTRY_KEY_PATH, REGISTRY_KEY_NAME) ??
+							GetRegistryDWORD(Registry.LocalMachine, REGISTRY_KEY_PATH, REGISTRY_KEY_NAME) ??
+								0;
+					UseTrace = value != 0;
+				}
 			}
 
 			/// <summary>Gets bool value from registry.</summary>
@@ -1590,6 +1595,9 @@ namespace LibZ.Bootstrap
 			/// <param name="path">The path to key.</param>
 			/// <param name="name">The name of value.</param>
 			/// <returns>Value of given... value.</returns>
+#if NET6_0_OR_GREATER
+			[System.Runtime.Versioning.SupportedOSPlatform("windows")]
+#endif
 			private static uint? GetRegistryDWORD(RegistryKey root, string path, string name)
 			{
 				var key = root.OpenSubKey(path, false);

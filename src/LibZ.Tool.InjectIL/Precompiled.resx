@@ -121,7 +121,13 @@
   <data name="LibZBootstrap40Assembly" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\libz.bootstrap.40.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="LibZBootstrapnet60Assembly" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\LibZ.Bootstrap.net60.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="LibZInjected40Assembly" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>resources\libz.injected.40.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LibZInjectednet60Assembly" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\LibZ.Injected.net60.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

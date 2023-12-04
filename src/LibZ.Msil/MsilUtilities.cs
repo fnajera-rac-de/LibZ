@@ -313,6 +313,16 @@ namespace LibZ.Msil
 		/// <exception cref="System.ArgumentException">Thrown if 'System' is not referenced.</exception>
 		public static Version GetFrameworkVersion(AssemblyDefinition assembly)
 		{
+			var targetFrameworkAttr = assembly.MainModule.CustomAttributes.FirstOrDefault(x => x.AttributeType.FullName == "System.Runtime.Versioning.TargetFrameworkAttribute");
+			if (targetFrameworkAttr != null)
+			{
+				var name = (string) targetFrameworkAttr.ConstructorArguments[0].Value;
+				if (name.StartsWith(".NETCoreApp,Version="))
+				{
+					return new Version(name.Substring(20));
+				}
+			}
+
 			var assemblyNames = 
 				new[] { "mscorlib", "System", "System.Core" }.Select(n => n.ToLower()).ToList();
 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{2D9FB6F9-E0EF-4347-9894-BAECAD8881FB}"
 	ProjectSection(SolutionItems) = preProject
@@ -33,7 +33,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibZ.Tool.InjectIL", "LibZ.Tool.InjectIL\LibZ.Tool.InjectIL.csproj", "{A391D2AA-228B-4DF4-9C0E-05B386B323E3}"
 	ProjectSection(ProjectDependencies) = postProject
 		{66762F06-D368-4A1D-91AD-D5B0300CB879} = {66762F06-D368-4A1D-91AD-D5B0300CB879}
+		{D5CA3B8A-CC35-43B6-91D8-A478515179CC} = {D5CA3B8A-CC35-43B6-91D8-A478515179CC}
 		{DC6CFABD-2B97-481B-8334-4DECDAF289EA} = {DC6CFABD-2B97-481B-8334-4DECDAF289EA}
+		{E8F5E9BE-3D00-44F3-9376-24ACB0D09F7C} = {E8F5E9BE-3D00-44F3-9376-24ACB0D09F7C}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibZ.Codec.Doboz", "LibZ.Codec.Doboz\LibZ.Codec.Doboz.csproj", "{48C3B10C-6370-4575-8D34-6BD43BA2772D}"
@@ -43,6 +45,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibZ.Msil", "LibZ.Msil\LibZ.Msil.csproj", "{68297D08-A36C-4C4D-8E41-2644FD7B3896}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".NET40", ".NET40", "{36F7AAFB-9EF7-4351-B5F5-0FC24E9534D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".NET60", ".NET60", "{9DBF4D81-D41C-469D-8991-B08D0B24714A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibZ.Injected.net60", "LibZ.Injected.net60\LibZ.Injected.net60.csproj", "{D5CA3B8A-CC35-43B6-91D8-A478515179CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibZ.Bootstrap.net60", "LibZ.Bootstrap.net60\LibZ.Bootstrap.net60.csproj", "{E8F5E9BE-3D00-44F3-9376-24ACB0D09F7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -90,6 +98,14 @@ Global
 		{68297D08-A36C-4C4D-8E41-2644FD7B3896}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68297D08-A36C-4C4D-8E41-2644FD7B3896}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68297D08-A36C-4C4D-8E41-2644FD7B3896}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5CA3B8A-CC35-43B6-91D8-A478515179CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5CA3B8A-CC35-43B6-91D8-A478515179CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5CA3B8A-CC35-43B6-91D8-A478515179CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5CA3B8A-CC35-43B6-91D8-A478515179CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8F5E9BE-3D00-44F3-9376-24ACB0D09F7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8F5E9BE-3D00-44F3-9376-24ACB0D09F7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8F5E9BE-3D00-44F3-9376-24ACB0D09F7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8F5E9BE-3D00-44F3-9376-24ACB0D09F7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,5 +113,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{66762F06-D368-4A1D-91AD-D5B0300CB879} = {36F7AAFB-9EF7-4351-B5F5-0FC24E9534D4}
 		{DC6CFABD-2B97-481B-8334-4DECDAF289EA} = {36F7AAFB-9EF7-4351-B5F5-0FC24E9534D4}
+		{D5CA3B8A-CC35-43B6-91D8-A478515179CC} = {9DBF4D81-D41C-469D-8991-B08D0B24714A}
+		{E8F5E9BE-3D00-44F3-9376-24ACB0D09F7C} = {9DBF4D81-D41C-469D-8991-B08D0B24714A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {62905CA3-8414-4198-9FAE-58E8CC7BEBFA}
 	EndGlobalSection
 EndGlobal

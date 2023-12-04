@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>LibZ.Bootstrap.net60</RootNamespace>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\LibZ.snk</AssemblyOriginatorKeyFile>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\LibZ.Bootstrap.40\LibZResolver.cs" Link="LibZResolver.cs" />
+    <Compile Include="..\LibZ.Bootstrap.40\Properties\AssemblyInfo.cs" Link="AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy /y /d $(TargetPath) $(ProjectDir)..\LibZ.Tool.InjectIL\Resources\LibZ.Bootstrap.net60.dll" />
+  </Target>
+
+</Project>

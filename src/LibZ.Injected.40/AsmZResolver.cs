@@ -110,11 +110,16 @@ namespace LibZ.Injected
 		/// <summary>Initializes the <see cref="AsmZResolver"/> class.</summary>
 		static AsmZResolver()
 		{
-			var value =
-				SafeGetRegistryDWORD(false, REGISTRY_KEY_PATH, REGISTRY_KEY_NAME) ??
-					SafeGetRegistryDWORD(true, REGISTRY_KEY_PATH, REGISTRY_KEY_NAME) ??
+#if NET6_0_OR_GREATER
+			if (OperatingSystem.IsWindows())
+#endif
+			{
+				var value =
+					SafeGetRegistryDWORD(false, REGISTRY_KEY_PATH, REGISTRY_KEY_NAME) ??
+						SafeGetRegistryDWORD(true, REGISTRY_KEY_PATH, REGISTRY_KEY_NAME) ??
 						0;
-			UseTrace = value != 0;
+				UseTrace = value != 0;
+			}
 		}
 
 
@@ -155,6 +160,9 @@ namespace LibZ.Injected
 		/// <param name="path">The path to key.</param>
 		/// <param name="name">The name of value.</param>
 		/// <returns>Value of given... value.</returns>
+#if NET6_0_OR_GREATER
+		[System.Runtime.Versioning.SupportedOSPlatform("windows")]
+#endif
 		private static uint? SafeGetRegistryDWORD(bool machine, string path, string name)
 		{
 			try
@@ -173,6 +181,9 @@ namespace LibZ.Injected
 		/// <param name="path">The path to key.</param>
 		/// <param name="name">The name of value.</param>
 		/// <returns>Value of given... value.</returns>
+#if NET6_0_OR_GREATER
+		[System.Runtime.Versioning.SupportedOSPlatform("windows")]
+#endif
 		private static uint? GetRegistryDWORD(bool machine, string path, string name)
 		{
 			var root = machine ? Registry.LocalMachine : Registry.CurrentUser;

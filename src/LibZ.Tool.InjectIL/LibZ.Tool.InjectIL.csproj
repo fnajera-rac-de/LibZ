@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -66,7 +66,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\LibZ.Bootstrap.40.dll" />
+    <Content Include="Resources\LibZ.Bootstrap.net60.dll" />
     <Content Include="Resources\LibZ.Injected.40.dll" />
+    <Content Include="Resources\LibZ.Injected.net60.dll" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LibZ.Msil\LibZ.Msil.csproj">
