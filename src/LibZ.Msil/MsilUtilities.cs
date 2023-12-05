@@ -313,13 +313,13 @@ namespace LibZ.Msil
 		/// <exception cref="System.ArgumentException">Thrown if 'System' is not referenced.</exception>
 		public static Version GetFrameworkVersion(AssemblyDefinition assembly)
 		{
-			var targetFrameworkAttr = assembly.MainModule.CustomAttributes.FirstOrDefault(x => x.AttributeType.FullName == "System.Runtime.Versioning.TargetFrameworkAttribute");
+			var targetFrameworkAttr = assembly.CustomAttributes.FirstOrDefault(x => x.AttributeType.FullName == "System.Runtime.Versioning.TargetFrameworkAttribute");
 			if (targetFrameworkAttr != null)
 			{
 				var name = (string) targetFrameworkAttr.ConstructorArguments[0].Value;
-				if (name.StartsWith(".NETCoreApp,Version="))
+				if (name.StartsWith(".NETCoreApp,Version=v"))
 				{
-					return new Version(name.Substring(20));
+					return new Version(name.Substring(21));
 				}
 			}
 
