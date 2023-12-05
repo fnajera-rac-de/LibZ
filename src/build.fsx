@@ -89,7 +89,7 @@ Target "Version" (fun _ ->
 )
 
 Target "Release" (fun _ ->
-    [ ""; "lib"; "lib/net40"; "tool" ]
+    [ ""; "lib"; "lib/net40"; "lib/net60"; "tool" ]
     |> Seq.map (sprintf "./../out/%s")
     |> CleanDirs
 
@@ -103,6 +103,8 @@ Target "Release" (fun _ ->
 
     !! "./LibZ.Bootstrap.40/LibZResolver.cs" |> Copy "./../out/lib/net40"
     !! "./LibZ.Bootstrap.40/bin/Release/LibZ.Bootstrap.dll" |> Copy "./../out/lib/net40"
+    !! "./LibZ.Bootstrap.40/LibZResolver.cs" |> Copy "./../out/lib/net60"
+    !! "./LibZ.Bootstrap.net60/bin/Release/net6.0/LibZ.Bootstrap.dll" |> Copy "./../out/lib/net60"
 
     let temp = (environVarOrDefault "TEMP" "./../out/temp") @@ "libz"
     !! "./../out/tool/**/*" |> Copy temp
@@ -168,6 +170,8 @@ Target "NuGet" (fun _ ->
                     [
                         (@"lib\net40\*.cs", Some @"content\net4-client", None) |> cond 's' 
                         (@"lib\net40\*.dll", Some @"lib\net4-client", None) |> cond 'l' 
+                        (@"lib\net60\*.cs", Some @"content\net60", None) |> cond 's' 
+                        (@"lib\net60\*.dll", Some @"lib\net60", None) |> cond 'l' 
                         (@"tool\libz.exe", Some @"tools\", None) |> cond 't' 
                     ] |> List.choose id
             }

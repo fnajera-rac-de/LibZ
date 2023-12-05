@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>LibZ.Bootstrap.net60</RootNamespace>
+    <RootNamespace>LibZ.Bootstrap</RootNamespace>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\LibZ.snk</AssemblyOriginatorKeyFile>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyName>LibZ.Bootstrap</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
