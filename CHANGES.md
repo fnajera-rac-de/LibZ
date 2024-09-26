@@ -1,3 +1,6 @@
+## 1.2.0.4
+- replace MD5 for SHA-1 to be FIPs-compliant
+
 ## 1.2.0.3
 - add support for .NET 6
 
